@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Todo from './todo';
-import './todo.css';
+import './todo-list.css';
 
 let lastId = 0;
 
@@ -16,11 +16,13 @@ class TodoList extends Component {
     return this.state.todos.filter(t => !t.done).length;
   }
 
-  onAddTodo = () =>
+  onAddTodo = event => {
+    event.preventDefault(); // prevents form submit
     this.setState(state => ({
       todoText: '',
       todos: state.todos.concat(createTodo(state.todoText))
     }));
+  };
 
   onArchiveCompleted = () =>
     this.setState(state => ({
